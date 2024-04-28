@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:test_flutter_project/functions/app.dart';
 import 'package:test_flutter_project/generated/locale_keys.g.dart';
 
 
-
+@RoutePage()
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -146,8 +147,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Icon(Icons.account_circle_rounded, size: 30),
-                        Text(LocaleKeys.Profile.tr(), style: mainTheme.textTheme.titleLarge),
-                      ],
+                        ElevatedButton(
+                          onPressed: (){},
+                          child: Text(LocaleKeys.Profile.tr(), style: mainTheme.textTheme.headlineSmall),
+
+                        // Icon(Icons.account_circle_rounded, size: 30),
+                        // Text(LocaleKeys.Profile.tr(), style: mainTheme.textTheme.titleLarge),
+                        )],
                     ),
                     Column(
                       children: [
@@ -158,8 +164,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Icon(Icons.chat, color: mainGrey, size: 30),
-                        Text(LocaleKeys.Chat.tr(), style: mainTheme.textTheme.headlineSmall),
-                      ],
+                        ElevatedButton(
+                            onPressed: (){
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => ChatScreen())
+                              );
+                            },
+                            child:
+                            Text(LocaleKeys.Chat.tr(), style: mainTheme.textTheme.headlineSmall),
+
+                        // Icon(Icons.chat, color: mainGrey, size: 30),
+                        // Text(LocaleKeys.Chat.tr(), style: mainTheme.textTheme.headlineSmall),
+                        )],
                     ),
                   ],
                 ),
@@ -169,5 +185,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ));
+  }
+}
+
+class ChatScreen extends StatelessWidget{
+  const ChatScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Center(child: Text('Чатик в разработке')),),
+    );
   }
 }
